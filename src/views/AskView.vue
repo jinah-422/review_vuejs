@@ -1,0 +1,47 @@
+<template>
+  <div>
+      <p v-for="ask in this.$store.state.ask" class="container">
+       <router-link v-bind:to="`item/${ask.id}`" class="title">{{ ask.title }}</router-link>
+          <!-- ask에서는 title누르면 해당id의 질문페이지로 이동 -->
+          <!-- ItemView로 route -->
+          <small class="hour-user">
+            <div>
+              {{ask.time_ago}}
+              | by. {{ ask.user }}
+            </div>
+          </small>
+      </p>
+  </div>
+</template>
+
+<script>
+export default {
+  created() {
+    // vue생성되면 actions내의 'FETCH_ASK'호출
+    this.$store.dispatch('FETCH_ASK')
+    .then(() => console.log('fetch success'))
+    .catch(() => console.log('fetch failed'))
+  }
+}
+</script>
+
+<style scoped>
+a {
+    text-decoration-line: none;
+    color: #34495e;
+}
+
+.title {
+  align-items: center;
+  display: flex;
+}
+
+.container {
+  border-bottom: 2.5px solid #eee;
+}
+
+.hour-user {
+  font-style: italic;
+}
+
+</style>
