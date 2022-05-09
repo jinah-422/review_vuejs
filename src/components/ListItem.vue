@@ -30,7 +30,6 @@
                 <a :href="item.url"> | from. {{ item.domain }}</a>
             </small>
         </div>
-
     </li>
   </ul>
 </template>
@@ -59,9 +58,9 @@ a {
     color: #34495e;
 }
 
-a:hover {
+/* a:hover {
     color:red;
-}
+} */
 
 .item-title {
     align-items: center;

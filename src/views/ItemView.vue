@@ -1,7 +1,16 @@
 <template>
+<!-- AskView -> ItemView 상세 질문페이지 -->
   <div>
-    <section>
-        <div class="user-container">
+    <section class="header-container">
+        <user-profile :info="fetchedItem">
+            <div slot="userName">
+                <router-link :to="`/user/${fetchedItem.user}`">{{ fetchedItem.user }}
+                </router-link>
+                </div>
+            <div slot="time">Posted {{ fetchedItem.time_ago }}</div>
+            <span slot="userKarma">({{ fetchedItem.points }})</span>
+        </user-profile>
+        <!-- <div class="user-container">
             <div class="user-icon"><i class="fas fa-user-circle"></i></div>
 
             <div class="user-description">
@@ -11,7 +20,7 @@
             <div class="time">
             {{ fetchedItem.time_ago }} </div>
             </div>
-        </div>
+        </div> -->
     
         <div class="ques-mark">
             <h2 class="title">
@@ -28,9 +37,11 @@
 </template>
 
 <script>
+import UserProfile from '../components/UserProfile.vue';
 import {mapGetters} from 'vuex';
 
 export default {
+  components: { UserProfile },
     created() {
         const itemId = this.$route.params.id;
         this.$store.dispatch('FETCH_ITEM', itemId)

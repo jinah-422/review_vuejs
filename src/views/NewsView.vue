@@ -14,13 +14,34 @@
 
 <script>
 import ListItem from "../components/ListItem.vue"
+import bus from "../utils/bus.js"
 
 export default {
   components: { ListItem },
     created() {
+        bus.$emit('start:spinner') // bus로 emit이벤트 (start:spinner) 보냄
+
+        // 지연 test
+        setTimeout(() => { 
         this.$store.dispatch('FETCH_NEWS')
-        .then(() => console.log('fetch success'))
-        .catch(() => console.log('fetch failed'))       
+        .then(() => {
+            bus.$emit('end:spinner');
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+        }, 1500);
+
+
+        // this.$store.dispatch('FETCH_NEWS')
+        // .then(() => {
+        //     console.log('spinner end')
+        //     bus.$emit('end:spinner');
+        // })
+        // .catch((error) => {
+        //     console.log(error)
+        // })
+
     }
 }
 </script>

@@ -18,13 +18,23 @@
 
 <script>
 import ListItem from '../components/ListItem.vue'
+import bus from '../utils/bus.js'
+
 export default {
   components: { ListItem },
   created() {
-    // vue생성되면 actions내의 'FETCH_ASK'호출
+    bus.$emit('start:spinner')
+
+    setTimeout(() => {
     this.$store.dispatch('FETCH_ASK')
-    .then(() => console.log('fetch success'))
-    .catch(() => console.log('fetch failed'))
+    .then(() => {
+      bus.$emit('end:spinner');
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+    }, 1500);
+
   }
 }
 </script>
