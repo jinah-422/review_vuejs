@@ -1,21 +1,25 @@
 <template>
   <div>
-      <p v-for="ask in this.$store.state.ask" class="container">
-       <router-link v-bind:to="`item/${ask.id}`" class="title">{{ ask.title }}</router-link>
+      <!-- <p v-for="ask in this.$store.state.ask" class="container">
+       <router-link v-bind:to="`item/${ask.id}`" class="title">{{ ask.title }}</router-link> -->
           <!-- ask에서는 title누르면 해당id의 질문페이지로 이동 -->
           <!-- ItemView로 route -->
-          <small class="hour-user">
+          <!-- <small class="hour-user">
             <div>
               {{ask.time_ago}}
               | by. {{ ask.user }}
             </div>
           </small>
-      </p>
+      </p> -->
+
+      <list-item></list-item>
   </div>
 </template>
 
 <script>
+import ListItem from '../components/ListItem.vue'
 export default {
+  components: { ListItem },
   created() {
     // vue생성되면 actions내의 'FETCH_ASK'호출
     this.$store.dispatch('FETCH_ASK')

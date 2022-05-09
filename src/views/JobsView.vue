@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p v-for="job in this.$store.state.jobs" class="container">
+    <!-- <p v-for="job in this.$store.state.jobs" class="container">
       <a :href="job.url" class="title">{{ job.title }}</a>  
       <small class="hour-domain">
            <div>
@@ -8,12 +8,16 @@
               <a :href="job.url">| from. {{ job.domain }}</a>
             </div>
       </small>   
-    </p>
+    </p> -->
+
+    <list-item></list-item>
   </div>
 </template>
 
 <script>
+import ListItem from '../components/ListItem.vue'
 export default {
+  components: { ListItem },
   created() {
     this.$store.dispatch('FETCH_JOBS')
   }
